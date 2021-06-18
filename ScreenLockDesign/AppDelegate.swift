@@ -28,18 +28,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if alreadyHavePIN != nil {
 //            let pinPage = storyBoard.instantiateViewController(identifier: Constants.PINPageID)
 //            self.window?.rootViewController = pinPage
-            let rootVc = MainVc()
-            let rootNC = UINavigationController(rootViewController: rootVc)
-            window?.rootViewController = rootNC
-            window?.makeKeyAndVisible()
+            
+//            let rootVc = MainVc()
+//            let rootNC = UINavigationController(rootViewController: rootVc)
+//            window?.rootViewController = rootNC
+//            window?.makeKeyAndVisible()
 //
         } else {
 //            let homePage = storyBoard.instantiateViewController(identifier: Constants.mainPageID)
 //            self.window?.rootViewController = homePage
-            let rootVc = PINVc()
-            let rootNC = UINavigationController(rootViewController: rootVc)
-            window?.rootViewController = rootNC
-            window?.makeKeyAndVisible()
+            
+//            let rootVc = PINVc()
+//            let rootNC = UINavigationController(rootViewController: rootVc)
+//            window?.rootViewController = rootNC
+//            window?.makeKeyAndVisible()
         }
         
         
