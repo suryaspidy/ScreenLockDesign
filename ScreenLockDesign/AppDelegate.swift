@@ -11,21 +11,57 @@ import CoreData
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    
+    var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let alreadyHavePIN = UserDefaults.standard.string(forKey: "PIN")
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        
+        window = UIWindow(frame: UIScreen.main.bounds)
+        
+        print(alreadyHavePIN)
+        
+        
+        if alreadyHavePIN != nil {
+//            let pinPage = storyBoard.instantiateViewController(identifier: Constants.PINPageID)
+//            self.window?.rootViewController = pinPage
+            let rootVc = MainVc()
+            let rootNC = UINavigationController(rootViewController: rootVc)
+            window?.rootViewController = rootNC
+            window?.makeKeyAndVisible()
+//
+        } else {
+//            let homePage = storyBoard.instantiateViewController(identifier: Constants.mainPageID)
+//            self.window?.rootViewController = homePage
+            let rootVc = PINVc()
+            let rootNC = UINavigationController(rootViewController: rootVc)
+            window?.rootViewController = rootNC
+            window?.makeKeyAndVisible()
+        }
+        
+        
+//        guard let rootVC = MainVc() else {
+//            print("Root VC not found")
+//            return true
+//        }
+        
+        
         return true
     }
 
-    // MARK: UISceneSession Lifecycle
+//     MARK: UISceneSession Lifecycle
 
+    @available(iOS 13.0, *)
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         // Called when a new scene session is being created.
         // Use this method to select a configuration to create the new scene with.
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
 
+    @available(iOS 13.0, *)
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
         // Called when the user discards a scene session.
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
@@ -46,7 +82,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                 
+
                 /*
                  Typical reasons for an error here include:
                  * The parent directory does not exist, cannot be created, or disallows writing.

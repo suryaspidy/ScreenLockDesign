@@ -7,15 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D190965267B52150038C22A /* PINVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D190964267B52150038C22A /* PINVc.swift */; };
 		2DFD90D4267A0F2700A1D394 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFD90D3267A0F2700A1D394 /* AppDelegate.swift */; };
 		2DFD90D6267A0F2700A1D394 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFD90D5267A0F2700A1D394 /* SceneDelegate.swift */; };
-		2DFD90D8267A0F2700A1D394 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFD90D7267A0F2700A1D394 /* ViewController.swift */; };
 		2DFD90DB267A0F2700A1D394 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2DFD90D9267A0F2700A1D394 /* Main.storyboard */; };
 		2DFD90DE267A0F2700A1D394 /* ScreenLockDesign.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2DFD90DC267A0F2700A1D394 /* ScreenLockDesign.xcdatamodeld */; };
 		2DFD90E0267A0F2900A1D394 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2DFD90DF267A0F2900A1D394 /* Assets.xcassets */; };
 		2DFD90E3267A0F2900A1D394 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2DFD90E1267A0F2900A1D394 /* LaunchScreen.storyboard */; };
 		2DFD90EE267A0F2A00A1D394 /* ScreenLockDesignTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFD90ED267A0F2A00A1D394 /* ScreenLockDesignTests.swift */; };
 		2DFD90F9267A0F2A00A1D394 /* ScreenLockDesignUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFD90F8267A0F2A00A1D394 /* ScreenLockDesignUITests.swift */; };
+		2DFD9107267A126900A1D394 /* MainVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFD9106267A126900A1D394 /* MainVc.swift */; };
+		2DFD9109267A263600A1D394 /* PINPageVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFD9108267A263600A1D394 /* PINPageVc.swift */; };
+		2DFD910D267A2DEB00A1D394 /* AppLockMainPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFD910B267A2DEB00A1D394 /* AppLockMainPageCell.swift */; };
+		2DFD910E267A2DEB00A1D394 /* AppLockMainPageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2DFD910C267A2DEB00A1D394 /* AppLockMainPageCell.xib */; };
+		2DFD9111267A2EF600A1D394 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFD9110267A2EF600A1D394 /* Constants.swift */; };
+		2DFD9125267A78BA00A1D394 /* FingerPrintCheckVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFD9124267A78BA00A1D394 /* FingerPrintCheckVc.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,10 +42,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2D190964267B52150038C22A /* PINVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PINVc.swift; sourceTree = "<group>"; };
 		2DFD90D0267A0F2700A1D394 /* ScreenLockDesign.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScreenLockDesign.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DFD90D3267A0F2700A1D394 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2DFD90D5267A0F2700A1D394 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		2DFD90D7267A0F2700A1D394 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2DFD90DA267A0F2700A1D394 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2DFD90DD267A0F2700A1D394 /* ScreenLockDesign.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ScreenLockDesign.xcdatamodel; sourceTree = "<group>"; };
 		2DFD90DF267A0F2900A1D394 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -51,6 +57,12 @@
 		2DFD90F4267A0F2A00A1D394 /* ScreenLockDesignUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScreenLockDesignUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DFD90F8267A0F2A00A1D394 /* ScreenLockDesignUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenLockDesignUITests.swift; sourceTree = "<group>"; };
 		2DFD90FA267A0F2A00A1D394 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2DFD9106267A126900A1D394 /* MainVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVc.swift; sourceTree = "<group>"; };
+		2DFD9108267A263600A1D394 /* PINPageVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PINPageVc.swift; sourceTree = "<group>"; };
+		2DFD910B267A2DEB00A1D394 /* AppLockMainPageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLockMainPageCell.swift; sourceTree = "<group>"; };
+		2DFD910C267A2DEB00A1D394 /* AppLockMainPageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AppLockMainPageCell.xib; sourceTree = "<group>"; };
+		2DFD9110267A2EF600A1D394 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		2DFD9124267A78BA00A1D394 /* FingerPrintCheckVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FingerPrintCheckVc.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,14 +113,16 @@
 		2DFD90D2267A0F2700A1D394 /* ScreenLockDesign */ = {
 			isa = PBXGroup;
 			children = (
+				2DFD910F267A2EE100A1D394 /* Model */,
+				2DFD910A267A2DB200A1D394 /* Cells */,
 				2DFD90D3267A0F2700A1D394 /* AppDelegate.swift */,
 				2DFD90D5267A0F2700A1D394 /* SceneDelegate.swift */,
-				2DFD90D7267A0F2700A1D394 /* ViewController.swift */,
 				2DFD90D9267A0F2700A1D394 /* Main.storyboard */,
 				2DFD90DF267A0F2900A1D394 /* Assets.xcassets */,
 				2DFD90E1267A0F2900A1D394 /* LaunchScreen.storyboard */,
 				2DFD90E4267A0F2900A1D394 /* Info.plist */,
 				2DFD90DC267A0F2700A1D394 /* ScreenLockDesign.xcdatamodeld */,
+				2DFD9123267A789D00A1D394 /* Controller */,
 			);
 			path = ScreenLockDesign;
 			sourceTree = "<group>";
@@ -129,6 +143,34 @@
 				2DFD90FA267A0F2A00A1D394 /* Info.plist */,
 			);
 			path = ScreenLockDesignUITests;
+			sourceTree = "<group>";
+		};
+		2DFD910A267A2DB200A1D394 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				2DFD910B267A2DEB00A1D394 /* AppLockMainPageCell.swift */,
+				2DFD910C267A2DEB00A1D394 /* AppLockMainPageCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		2DFD910F267A2EE100A1D394 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2DFD9110267A2EF600A1D394 /* Constants.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2DFD9123267A789D00A1D394 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2DFD9106267A126900A1D394 /* MainVc.swift */,
+				2DFD9108267A263600A1D394 /* PINPageVc.swift */,
+				2DFD9124267A78BA00A1D394 /* FingerPrintCheckVc.swift */,
+				2D190964267B52150038C22A /* PINVc.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,6 +276,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2DFD910E267A2DEB00A1D394 /* AppLockMainPageCell.xib in Resources */,
 				2DFD90E3267A0F2900A1D394 /* LaunchScreen.storyboard in Resources */,
 				2DFD90E0267A0F2900A1D394 /* Assets.xcassets in Resources */,
 				2DFD90DB267A0F2700A1D394 /* Main.storyboard in Resources */,
@@ -261,8 +304,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2DFD910D267A2DEB00A1D394 /* AppLockMainPageCell.swift in Sources */,
+				2D190965267B52150038C22A /* PINVc.swift in Sources */,
 				2DFD90DE267A0F2700A1D394 /* ScreenLockDesign.xcdatamodeld in Sources */,
-				2DFD90D8267A0F2700A1D394 /* ViewController.swift in Sources */,
+				2DFD9125267A78BA00A1D394 /* FingerPrintCheckVc.swift in Sources */,
+				2DFD9107267A126900A1D394 /* MainVc.swift in Sources */,
+				2DFD9109267A263600A1D394 /* PINPageVc.swift in Sources */,
+				2DFD9111267A2EF600A1D394 /* Constants.swift in Sources */,
 				2DFD90D4267A0F2700A1D394 /* AppDelegate.swift in Sources */,
 				2DFD90D6267A0F2700A1D394 /* SceneDelegate.swift in Sources */,
 			);
@@ -442,6 +490,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = ScreenLockDesign/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -460,6 +509,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = ScreenLockDesign/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
