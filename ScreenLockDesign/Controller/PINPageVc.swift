@@ -1,173 +1,240 @@
-////
-////  PINPageVc.swift
-////  ScreenLockDesign
-////
-////  Created by surya-zstk231 on 16/06/21.
-////
 //
-//import UIKit
+//  UpdatedPINVc.swift
+//  ScreenLockDesign
 //
-//class PINPageVc: UIViewController {
+//  Created by surya-zstk231 on 20/06/21.
 //
-//    @IBOutlet weak var collectionView: UICollectionView!
-//    @IBOutlet weak var collectionViewHeightAnchor: NSLayoutConstraint!
-//    @IBOutlet weak var fillViewOne: UIView!
-//    @IBOutlet weak var fillViewTwo: UIView!
-//    @IBOutlet weak var fillViewThree: UIView!
-//    @IBOutlet weak var fillViewFour: UIView!
-//    
-//    var countOfTappedPIN:Int = 0
-//    
-//    var password:[String] = []
-//    
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        
-//        initialAlignments()
-//        fixHeight()
-//        collectionView.register(UINib(nibName: Constants.oneAndNinezBtnNibName, bundle: nil), forCellWithReuseIdentifier: Constants.oneAndNinezBtnID)
-//        collectionView.register(UINib(nibName: Constants.twoToNineBtnsNibName, bundle: nil), forCellWithReuseIdentifier: Constants.twoToNineBtnsID)
-//        collectionView.register(UINib(nibName: Constants.deleteBtnNibName, bundle: nil), forCellWithReuseIdentifier: Constants.deleteBtnID)
-//        
-//        collectionView.dataSource = self
-//        collectionView.delegate = self
-//        
-//        
-//    }
-//    
-//    func initialAlignments(){
-//        fillViewOne.layer.borderColor = UIColor.systemGreen.cgColor
-//        fillViewTwo.layer.borderColor = UIColor.systemGreen.cgColor
-//        fillViewThree.layer.borderColor = UIColor.systemGreen.cgColor
-//        fillViewFour.layer.borderColor = UIColor.systemGreen.cgColor
-//        
-//        fillViewOne.backgroundColor = .systemGray
-//        fillViewTwo.backgroundColor = .systemGray
-//        fillViewThree.backgroundColor = .systemGray
-//        fillViewFour.backgroundColor = .systemGray
-//        
-//        fillViewOne.layer.borderWidth = 2
-//        fillViewTwo.layer.borderWidth = 2
-//        fillViewThree.layer.borderWidth = 2
-//        fillViewFour.layer.borderWidth = 2
-//        
-//        fillViewOne.layer.cornerRadius = fillViewOne.frame.height/2
-//        fillViewTwo.layer.cornerRadius = fillViewTwo.frame.height/2
-//        fillViewThree.layer.cornerRadius = fillViewThree.frame.height/2
-//        fillViewFour.layer.cornerRadius = fillViewFour.frame.height/2
-//    }
-//    
-//    
-//    func fixHeight(){
-//        print(collectionView.frame.width)
-//        let originalHeight = collectionView.frame.width / 3
-//        let updatedHeight = originalHeight * 4
-//        collectionViewHeightAnchor.constant = updatedHeight
-//        print(collectionView.frame.height)
-//    }
-//    
-//    func changeIndicatorColour(indexPath: IndexPath){
-//        if countOfTappedPIN < 0{
-//            countOfTappedPIN = 0
-//        }
-//        if countOfTappedPIN > 0{
-//            fillViewOne.backgroundColor = .systemGreen
-//            if countOfTappedPIN > 1 {
-//                fillViewTwo.backgroundColor = .systemGreen
-//                if countOfTappedPIN > 2 {
-//                    fillViewThree.backgroundColor = .systemGreen
-//                    if countOfTappedPIN > 3 {
-//                        fillViewFour.backgroundColor = .systemGreen
-//                        initialAlignments()
-//                        countOfTappedPIN = 0
-//                        let alert = UIAlertController(title: "Youe PIN update succesfully", message: "", preferredStyle: .alert)
-//                        let action = UIAlertAction(title: "Done", style: .default, handler: nil)
-//                        alert.addAction(action)
-//                        self.present(alert, animated: true, completion: nil)
-//                    }
-//                }
-//            }
-//        }
-//    }
-//    
-//    
-//    func seperateCollectionViewCell(indexPath: IndexPath, collectionView: UICollectionView) ->UICollectionViewCell{
-//        print(indexPath.row)
-//        if indexPath.row == 0 || indexPath.row == 10{
-//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.oneAndNinezBtnID, for: indexPath) as! OneAndZeroBtn
-//            cell.numberLabelArea.text = Constants.collectionViewNumberValues[indexPath.row]
-//            cell.viewHeightValue.constant = collectionView.frame.height/4 - 1
-//            cell.viewWidthValue.constant = collectionView.frame.width/3 - 1
-//            return cell
-//        } else if indexPath.row == 11 {
-//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.deleteBtnID, for: indexPath) as! DltBtn
-//            cell.viewHeightValue.constant = collectionView.frame.height/4 - 1
-//            cell.viewWidthValue.constant = collectionView.frame.width/3 - 1
-//            return cell
-//        } else if indexPath.row == 9{
-//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.oneAndNinezBtnID, for: indexPath) as! OneAndZeroBtn
-//            cell.viewHeightValue.constant = collectionView.frame.height/4 - 1
-//            cell.viewWidthValue.constant = collectionView.frame.width/3 - 1
-//            cell.numberLabelArea.text = ""
-//            cell.alpha = 0
-//            cell.isUserInteractionEnabled = false
-//            return cell
-//        }
-//        else {
-//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.twoToNineBtnsID, for: indexPath) as! TwoToNineBtn
-//            cell.viewHeightValue.constant = collectionView.frame.height/4 - 1
-//            cell.viewWidthValue.constant = collectionView.frame.width/3 - 1
-//            cell.numericLabelArea.text = Constants.collectionViewNumberValues[indexPath.row]
-//            cell.alphLabelArea.text = Constants.collectionViewAlphValues[indexPath.row-1]
-//            print(collectionView.frame.height)
-//            return cell
-//        }
-//    }
-//    
-//}
+
+import UIKit
+enum PINVerifyState {
+    case Check
+    case Update
+}
+
+class PINPageVc: UIViewController {
+    
+    @IBOutlet weak var fillViewOne: UIView!
+    @IBOutlet weak var fillViewTwo: UIView!
+    @IBOutlet weak var fillViewThree: UIView!
+    @IBOutlet weak var fillViewFour: UIView!
+    @IBOutlet weak var btn1: UIButton!
+    @IBOutlet weak var btn2: UIButton!
+    @IBOutlet weak var btn3: UIButton!
+    @IBOutlet weak var btn4: UIButton!
+    @IBOutlet weak var btn5: UIButton!
+    @IBOutlet weak var btn6: UIButton!
+    @IBOutlet weak var btn7: UIButton!
+    @IBOutlet weak var btn8: UIButton!
+    @IBOutlet weak var btn9: UIButton!
+    @IBOutlet weak var btn0: UIButton!
+    @IBOutlet weak var dltBtn: UIButton!
+    
+    var isUnlock: ((_ isUpdated: Bool) -> Void)?
+
+    var countOfTappedPIN:Int = 0
+    
+    var PINState:PINVerifyState = .Update
+    
+    var password:[String] = []
+    
+    var confirmPassword:[String] = []
+    
+    var attemptOfPINChageOperation = 1
+    
+    var window: UIWindow?
+    let storyBoard = UIStoryboard(name: Constants.storyBoardID, bundle: nil)
+    
+
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        initialAlignments()
+    }
+    
+    
+    func initialAlignments(){
+        DispatchQueue.main.async { [self] in
+            let viewArr:[UIView] = [fillViewOne,fillViewTwo,fillViewThree,fillViewFour]
+            
+            for i in 0...viewArr.count-1{
+                viewArr[i].layer.borderColor = UIColor.systemGreen.cgColor
+                viewArr[i].backgroundColor = UIColor(cgColor: UIColor.white.cgColor)
+                viewArr[i].layer.borderWidth = 2
+                viewArr[i].layer.cornerRadius = fillViewFour.frame.height/2
+            }
+            toCircleBtns()
+        }
+        
+    }
+    
+    func toCircleBtns(){
+        DispatchQueue.main.async { [self] in
+            let btnArr:[UIButton] = [btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9,btn0,dltBtn]
+            
+            for i in 0...btnArr.count-1 {
+                
+                btnArr[i].layer.cornerRadius = btn1.frame.height/2
+                btnArr[i].clipsToBounds = true
+                btnArr[i].addTarget(self, action: #selector(self.numericBtnsTapped), for: .touchUpInside)
+            }
+        }
+        
+        
+    }
+    
+    func dissmisView(){
+        let presentVc = storyBoard.instantiateViewController(withIdentifier: Constants.MainVcID)
+//        UIApplication.shared.windows.first?.rootViewController = presentVc
+//        UIApplication.shared.windows.first?.makeKeyAndVisible()
+        self.navigationController?.pushViewController(presentVc, animated: true)
+    }
+    
+    
+    func changeIndicatorColour(){
+        if countOfTappedPIN < 0{
+            countOfTappedPIN = 0
+        }
+        if countOfTappedPIN > 0{
+            fillViewOne.backgroundColor = .systemGreen
+            if countOfTappedPIN > 1 {
+                fillViewTwo.backgroundColor = .systemGreen
+                if countOfTappedPIN > 2 {
+                    fillViewThree.backgroundColor = .systemGreen
+                    if countOfTappedPIN > 3 {
+                        fillViewFour.backgroundColor = .systemGreen
+                        initialAlignments()
+                        countOfTappedPIN = 0
+                        switch PINState {
+                        case .Check:
+                            verifySamePassword()
+                        case .Update:
+                            toAllowGiveEnterSecondPIN()
+                        }
+                        
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    func updatePassword(){
+        var arrToStr:String = ""
+        for i in 0...password.count-1 {
+            arrToStr += password[i]
+        }
+        
+        UserDefaults.standard.set(arrToStr, forKey: Constants.PIN)
+    }
+    
+    func verifySamePassword(){
+        var arrToStr:String = ""
+        for i in 0...password.count-1 {
+            arrToStr += password[i]
+        }
+        if arrToStr == UserDefaults.standard.string(forKey: Constants.PIN) {
+            DispatchQueue.main.async { [self] in
+//                self.window = UIWindow(frame: UIScreen.main.bounds)
+//                let presentVc = self.storyBoard.instantiateViewController(withIdentifier: Constants.MainVcID) as! MainVc
+//                presentVc.isPasswordAlreadySet = true
+//    //            self.navigationController?.pushViewController(presentVc, animated: true)
 //
-//extension PINPageVc: UICollectionViewDataSource{
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return 12
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let cell = seperateCollectionViewCell(indexPath: indexPath, collectionView: collectionView)
-//        return cell
-//    }
-//    
-//    
-//}
-//extension PINPageVc: UICollectionViewDelegate{
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        if indexPath.row == 11 {
-//            countOfTappedPIN -= 1
-//            if countOfTappedPIN >= 0 {
-//                password.remove(at: password.count-1)
-//            }
-//            print(password)
-//            initialAlignments()
-//        } else {
-//            countOfTappedPIN += 1
-//            password.append(Constants.collectionViewNumberValues[indexPath.row])
-//            print(password)
-//        }
-//        changeIndicatorColour(indexPath: indexPath)
-//    }
-//}
-//
-//extension PINPageVc: UICollectionViewDelegateFlowLayout{
-////    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-////        let width = collectionView.frame.width/3 - 1
-////        let height = collectionView.frame.height/4 - 1
-////
-////        return CGSize(width: width, height: height)
-////    }
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-//        return CGFloat(0)
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-//        return CGFloat(0)
-//    }
-//}
+//                self.window!.rootViewController = presentVc
+//    //            self.window?.addSubview(presentVc.view)
+//    //            let vcs = self.window?.subviews
+//    //            for i in 0...vcs!.count{
+//    //                if vcs![i].tag == 0 {
+//    //                    self.window?.willRemoveSubview(vcs![i])
+//    //                }
+//    //            }
+//                self.window?.makeKeyAndVisible()
+                isUnlock?(true)
+            }
+        } else {
+            let alert = UIAlertController(title: "Wrong password", message: "", preferredStyle: .alert)
+            let action = UIAlertAction(title: "Back", style: .default, handler: nil)
+            alert.addAction(action)
+            self.present(alert, animated: true, completion: nil)
+        }
+        password = []
+    }
+    
+    
+    func checkPasswordForUpdate() -> Bool{
+        if password == confirmPassword {
+            var arrToStr:String = ""
+            for i in 0...confirmPassword.count-1 {
+                arrToStr += confirmPassword[i]
+            }
+            print(arrToStr)
+            
+            UserDefaults.standard.set(arrToStr, forKey: Constants.PIN)
+            return true
+        } else {
+            let alert = UIAlertController(title: "Please enter two same password", message: "Your password is wrong", preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK", style: .default,handler: nil)
+            alert.addAction(action)
+            password.removeAll()
+            confirmPassword.removeAll()
+            attemptOfPINChageOperation = 1
+            self.present(alert, animated: true, completion: nil)
+            
+            return false
+        }
+    }
+    
+    
+    func toAllowGiveEnterSecondPIN(){
+        if attemptOfPINChageOperation == 2 {
+            let toAllow = checkPasswordForUpdate()
+            if toAllow{
+                let alert = UIAlertController(title: "Youe PIN update succesfully", message: "", preferredStyle: .alert)
+                let action = UIAlertAction(title: "Done", style: .default) { action in
+                    UserDefaults.standard.set(true, forKey: Constants.PasswordExists)
+            }
+            alert.addAction(action)
+            self.present(alert, animated: true, completion: nil)
+            attemptOfPINChageOperation = 1
+            }
+            
+            
+            
+        } else {
+            let alert = UIAlertController(title: "Please confirm your PIN again", message: "", preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(action)
+            self.present(alert, animated: true, completion: nil)
+            
+            attemptOfPINChageOperation = 2
+        }
+    }
+    
+    
+    @IBAction func numericBtnsTapped(_ sender: UIButton) {
+        countOfTappedPIN += 1
+        if let n = sender.titleLabel?.text{
+            if attemptOfPINChageOperation == 1 {
+                password.append(n)
+            } else if attemptOfPINChageOperation == 2 {
+                confirmPassword.append(n)
+            }
+            changeIndicatorColour()
+        }
+    }
+    @IBAction func dltBtnTapped(_ sender: UIButton) {
+        countOfTappedPIN -= 1
+        if countOfTappedPIN >= 0 {
+            if attemptOfPINChageOperation == 1 {
+                password.remove(at: password.count-1)
+            } else if attemptOfPINChageOperation == 2 {
+                confirmPassword.remove(at: confirmPassword.count-1)
+            }
+        }
+        initialAlignments()
+        changeIndicatorColour()
+    }
+    
+
+
+}

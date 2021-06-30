@@ -8,14 +8,21 @@
 import UIKit
 import LocalAuthentication
 
-class FingerPrintCheckVc: UIViewController {
+class BioMetricLockVc: UIViewController {
+    var window: UIWindow?
+    
+    var isUnlock: ((_ isUpdated: Bool) -> Void)?
+    var isErrorOccuired: ((_ isErrorOccuaired: Bool) ->Void)?
 
+    let storyBoard = UIStoryboard(name: Constants.storyBoardID, bundle: nil)
     override func viewDidLoad() {
         super.viewDidLoad()
 
         detectFace()
         
     }
+    
+    
 
     func detectFace(){
         let context = LAContext()
@@ -25,19 +32,19 @@ class FingerPrintCheckVc: UIViewController {
             
             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "Please authorised") {[self] success, error in
                 DispatchQueue.main.async {
-                    if success {
-                        let alert = UIAlertController(title: "Success", message: "", preferredStyle: .alert)
-                        let action = UIAlertAction(title: "Go To Change PIN", style: .cancel, handler: nil)
-
-                        alert.addAction(action)
-                        self.present(alert, animated: true, completion: nil)
-
-                        self.navigationController?.dismiss(animated: true, completion: nil)
-                        self.dismiss(animated: true, completion: nil)
-                    } else {
-                        self.performSegue(withIdentifier: Constants.goToPINPage, sender: self)
+                    if error == nil {
+                        if success {
+                            isUnlock?(true)
+                        
+                        } else {
+                            isUnlock?(false)
+                        }
+                    }else {
+                        isErrorOccuired?(true)
                     }
+                    
                 }
+                
             }
         } else {
             let alert = UIAlertController(title: "Error", message: "", preferredStyle: .alert)

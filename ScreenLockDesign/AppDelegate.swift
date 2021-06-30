@@ -7,68 +7,189 @@
 
 import UIKit
 import CoreData
+import LocalAuthentication
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     
     var window: UIWindow?
+    let storyBoard = UIStoryboard(name: Constants.storyBoardID, bundle: nil)
+    
+//    var presentVc: UIViewController?
 
+    
+    
+    var screenLockActivatedVc: UIViewController?
+//    var parentVc: UIViewController?
+    
+    
+    
+    
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        let authType = LocalAuthManager.shared.biometricType
         
-        let alreadyHavePIN = UserDefaults.standard.string(forKey: "PIN")
-        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyBoard.instantiateViewController(withIdentifier: "ParentVc")
+        window?.rootViewController = vc
         
-        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.makeKeyAndVisible()
         
-        print(alreadyHavePIN)
         
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        let window = delegate.window
+        let alreadyHavePIN = UserDefaults.standard.string(forKey: Constants.PIN)
         
         if alreadyHavePIN != nil {
-//            let pinPage = storyBoard.instantiateViewController(identifier: Constants.PINPageID)
-//            self.window?.rootViewController = pinPage
+            if UserDefaults.standard.bool(forKey: Constants.PasswordExists) {
             
-//            let rootVc = MainVc()
-//            let rootNC = UINavigationController(rootViewController: rootVc)
-//            window?.rootViewController = rootNC
-//            window?.makeKeyAndVisible()
-//
+            if UserDefaults.standard.bool(forKey: Constants.IsBioMtricLockActivated) {
+                
+                switch authType {
+                        case .none:
+                            forGoesToPINPage()
+                        case .touchID:
+                            isHaveBiometricLock()
+                        case .faceID:
+                            isHaveBiometricLock()
+                        }
+                
+            
+                
+                
+            } else {
+                forGoesToPINPage()
+            }
+            }
+            
+
         } else {
-//            let homePage = storyBoard.instantiateViewController(identifier: Constants.mainPageID)
-//            self.window?.rootViewController = homePage
+            UserDefaults.standard.set(false, forKey: Constants.PasswordExists)
+            UserDefaults.standard.set(false, forKey: Constants.IsBioMtricLockActivated)
+            UserDefaults.standard.set(0, forKey: Constants.UserGivenTimeDuration)
+            let presentVc = storyBoard.instantiateViewController(withIdentifier: Constants.ParentVcID) as! ParentVc
+            presentVc.view.bounds = window?.bounds ?? .zero
             
-//            let rootVc = PINVc()
-//            let rootNC = UINavigationController(rootViewController: rootVc)
-//            window?.rootViewController = rootNC
-//            window?.makeKeyAndVisible()
+            
+            self.window!.rootViewController = presentVc
+            self.window?.makeKeyAndVisible()
+            
         }
-        
-        
-//        guard let rootVC = MainVc() else {
-//            print("Root VC not found")
-//            return true
-//        }
-        
         
         return true
     }
-
-//     MARK: UISceneSession Lifecycle
-
-    @available(iOS 13.0, *)
-    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        // Called when a new scene session is being created.
-        // Use this method to select a configuration to create the new scene with.
-        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+    
+    func isHaveBiometricLock(){
+        let presentVc = storyBoard.instantiateViewController(withIdentifier: Constants.BioMetricLockVcID) as! BioMetricLockVc
+        
+        presentVc.view.bounds = window?.bounds ?? .zero
+        presentVc.view.layer.zPosition = 1
+        window?.rootViewController?.view.addSubview(presentVc.view)
+        screenLockActivatedVc = presentVc
+        
+        presentVc.isUnlock = {[self] input in
+            if input {
+                presentVc.view.removeFromSuperview()
+            } else {
+                forGoesToPINPage()
+                presentVc.view.removeFromSuperview()
+            }
+        }
+        
+        presentVc.isErrorOccuired = { [self] input in
+            forGoesToPINPage()
+            presentVc.view.removeFromSuperview()
+            screenLockActivatedVc!.view.removeFromSuperview()
+            
+        }
     }
-
-    @available(iOS 13.0, *)
-    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-        // Called when the user discards a scene session.
-        // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
-        // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+    
+    func forGoesToPINPage(){
+        let presentVc = storyBoard.instantiateViewController(withIdentifier: Constants.PINPageVcID) as! PINPageVc
+        presentVc.PINState = .Check
+        
+        presentVc.view.bounds = window?.bounds ?? .zero
+        presentVc.view.layer.zPosition = 1
+        window?.rootViewController?.view.addSubview(presentVc.view)
+        screenLockActivatedVc = presentVc
+        
+        presentVc.isUnlock = { input in
+            presentVc.view.removeFromSuperview()
+        }
     }
+    var entersTime:CLongLong = 0
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        if (screenLockActivatedVc != nil) {
+            screenLockActivatedVc!.view.removeFromSuperview()
+        }
+        let firstTime = updateTime(currentTime: Date())
+        UserDefaults.standard.set(firstTime, forKey: Constants.WhenAppGoesToBackground)
+    }
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        let pin = UserDefaults.standard.string(forKey: Constants.PIN)
+        if pin != nil {
+            entersTime = updateTime(currentTime: Date())
+            let passwordExists = UserDefaults.standard.bool(forKey: Constants.PasswordExists)
+            if passwordExists {
+                let toAllow = checkUserComesAllowedLimitedTime(enterTime: Date())
+                toSelectRootVc(toAllowMainPage: toAllow)
+            }
+        }
+    }
+    
+    
+    func updateTime(currentTime: Date) -> CLongLong{
+        let timeInterval: TimeInterval = currentTime.timeIntervalSince1970
+        let millisecond = CLongLong(round(timeInterval*1000))
+        return millisecond
+    }
+    
+    
+    
+    func checkUserComesAllowedLimitedTime(enterTime: Date) -> Bool{
+        let goToBackgroundTime:CLongLong = UserDefaults.standard.object(forKey: Constants.WhenAppGoesToBackground) as! CLongLong
+        let timings = UserDefaults.standard.object(forKey: Constants.UserGivenTimeDuration)
+        let difference = entersTime - goToBackgroundTime
+        if difference >= timings as! Int64 {
+            return false
+        }
+        
+        return true
+    }
+    
+    func toSelectRootVc(toAllowMainPage: Bool){
+        
+        if toAllowMainPage {
+            let presentVc = storyBoard.instantiateViewController(withIdentifier: Constants.MainVcID) as! MainVc
+            presentVc.isPasswordAlreadySet = true
+            presentVc.view.frame = window?.bounds ?? .zero
+            presentVc.view.layer.zPosition = 1
+            window?.rootViewController?.view.addSubview(presentVc.view)
+        } else {
+            if UserDefaults.standard.bool(forKey: Constants.IsBioMtricLockActivated) {
+                
+                let authType = LocalAuthManager.shared.biometricType
+                
+                switch authType {
+                        case .none:
+                            forGoesToPINPage()
+                        case .touchID:
+                            isHaveBiometricLock()
+                        case .faceID:
+                            isHaveBiometricLock()
+                        }
+                
+            } else {
+                forGoesToPINPage()
+            }
+            
+        }
+        
+        
+    }
+    
 
     // MARK: - Core Data stack
 
@@ -116,4 +237,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 }
+
+
+extension LAContext {
+    enum BiometricType: String {
+        case none
+        case touchID
+        case faceID
+    }
+
+    var biometricType: BiometricType {
+        var error: NSError?
+
+        guard self.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) else {
+            return .none
+        }
+
+        if #available(iOS 11.0, *) {
+            switch self.biometryType {
+            case .none:
+                return .none
+            case .touchID:
+                return .touchID
+            case .faceID:
+                return .faceID
+            @unknown default:
+                #warning("Handle new Biometric type")
+            }
+        }
+        
+        return  self.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) ? .touchID : .none
+    }
+}
+
+
 
