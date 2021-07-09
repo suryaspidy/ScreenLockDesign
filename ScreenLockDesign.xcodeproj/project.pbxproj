@@ -11,6 +11,7 @@
 		2D08F85C267F35A400866459 /* PINPageVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D08F85B267F35A400866459 /* PINPageVc.swift */; };
 		2D6B8CC82681AF90009607C0 /* CheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6B8CC72681AF90009607C0 /* CheckBoxView.swift */; };
 		2D852A622682363F00BA0DE6 /* ParentVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D852A612682363F00BA0DE6 /* ParentVc.swift */; };
+		2DE46B6E269847E0000C36B6 /* SafeFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE46B6D269847E0000C36B6 /* SafeFile.swift */; };
 		2DEBC4E72689EB7600F02BD9 /* ZDRAppLock.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2DEBC4E62689EB7600F02BD9 /* ZDRAppLock.storyboard */; };
 		2DEBC508268A1B6300F02BD9 /* DropDownTableViewProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DEBC505268A1B6300F02BD9 /* DropDownTableViewProperties.swift */; };
 		2DEBC509268A1B6300F02BD9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DEBC506268A1B6300F02BD9 /* Constants.swift */; };
@@ -51,6 +52,7 @@
 		2D08F85B267F35A400866459 /* PINPageVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PINPageVc.swift; sourceTree = "<group>"; };
 		2D6B8CC72681AF90009607C0 /* CheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxView.swift; sourceTree = "<group>"; };
 		2D852A612682363F00BA0DE6 /* ParentVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentVc.swift; sourceTree = "<group>"; };
+		2DE46B6D269847E0000C36B6 /* SafeFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeFile.swift; sourceTree = "<group>"; };
 		2DEBC4E62689EB7600F02BD9 /* ZDRAppLock.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ZDRAppLock.storyboard; sourceTree = "<group>"; };
 		2DEBC505268A1B6300F02BD9 /* DropDownTableViewProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownTableViewProperties.swift; sourceTree = "<group>"; };
 		2DEBC506268A1B6300F02BD9 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 				2DFD910B267A2DEB00A1D394 /* AppLockMainPageCell.swift */,
 				2DFD910C267A2DEB00A1D394 /* AppLockMainPageCell.xib */,
 				2D6B8CC72681AF90009607C0 /* CheckBoxView.swift */,
+				2DE46B6D269847E0000C36B6 /* SafeFile.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -331,6 +334,7 @@
 			files = (
 				2DFD910D267A2DEB00A1D394 /* AppLockMainPageCell.swift in Sources */,
 				2DEBC50A268A1B6300F02BD9 /* LocalAuthManager.swift in Sources */,
+				2DE46B6E269847E0000C36B6 /* SafeFile.swift in Sources */,
 				2DEBC509268A1B6300F02BD9 /* Constants.swift in Sources */,
 				2DFD90DE267A0F2700A1D394 /* ScreenLockDesign.xcdatamodeld in Sources */,
 				2DFD9125267A78BA00A1D394 /* BioMetricLockVc.swift in Sources */,

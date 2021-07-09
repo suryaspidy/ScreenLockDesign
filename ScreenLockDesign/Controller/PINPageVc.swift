@@ -135,20 +135,6 @@ class PINPageVc: UIViewController {
         }
         if arrToStr == UserDefaults.standard.string(forKey: Constants.PIN) {
             DispatchQueue.main.async { [self] in
-//                self.window = UIWindow(frame: UIScreen.main.bounds)
-//                let presentVc = self.storyBoard.instantiateViewController(withIdentifier: Constants.MainVcID) as! MainVc
-//                presentVc.isPasswordAlreadySet = true
-//    //            self.navigationController?.pushViewController(presentVc, animated: true)
-//
-//                self.window!.rootViewController = presentVc
-//    //            self.window?.addSubview(presentVc.view)
-//    //            let vcs = self.window?.subviews
-//    //            for i in 0...vcs!.count{
-//    //                if vcs![i].tag == 0 {
-//    //                    self.window?.willRemoveSubview(vcs![i])
-//    //                }
-//    //            }
-//                self.window?.makeKeyAndVisible()
                 isUnlock?(true)
             }
         } else {
